@@ -32,13 +32,14 @@ h1 {
 }
 
 h2 {
+  width: 80%;
   text-align: center;
-  margin-top: 50px;
+  margin: 50px auto 20px;
 }
 
 .prop-listing-form,
 .App-searchbar {
-  width: 40%;
+  width: 90%;
   margin: 0 auto;
 }
 
@@ -49,23 +50,23 @@ h2 {
   margin: 10px 0;
 }
 
-.prop-listing-form-ques label {
+.prop-listing-form-ques label,
+.property-listing-search label {
   padding: 10px 10px 10px 0;
   /* padding-left: 0; */
 }
 
-.prop-listing-form-ques input {
-  padding: 10px;
-}
+.prop-listing-form-ques input,
 .property-listing-search input {
   padding: 10px;
+  border: 1px solid #bebebe;
 }
 
 .submit-buttons {
-  display: inline-block;
+  display: block;
   border: none;
   padding: 1rem 2rem;
-  margin: 0;
+  margin: 20px auto;
   text-decoration: none;
   background: #0069ed;
   color: #ffffff;
@@ -85,9 +86,20 @@ h2 {
   row-gap: 10px;
 }
 .all-listings {
-  width: 60%;
+  width: 95%;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   column-gap: 10px;
+}
+
+@media screen and (min-width: 769px) {
+  .prop-listing-form,
+  .App-searchbar {
+    width: 40%;
+    margin: 0 auto;
+  }
+  .all-listings {
+    width: 60%;
+  }
 }

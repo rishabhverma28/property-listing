@@ -21,6 +21,8 @@ function App() {
   const [searchInput, setSearchInput] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [listingsFound, setListingsFound] = useState(false);
+  const [listingAdded, setListingAdded] = useState(false);
+  const [errorInAdding, setErrorInAdding] = useState(false);
 
   const handleChange = evt => {
     const value = evt.target.value;
@@ -37,19 +39,13 @@ function App() {
 
   useEffect(() => {
     const fetchData = async () => {
-      // console.log();
       const result = await axios.get(URL_TO_BE_CALLED);
       setData(result.data);
-      console.log(result.data);
     };
     fetchData();
   }, []);
 
   const findListing = () => {
-    // const
-    // const result = axios.post("http://localhost:5000/findListing/" + searchInput);
-    // setSearchResults(result.data)
-    // console.log(result.data);
     axios
       .post(URL_TO_BE_CALLED + "/findListing", {
         query: searchInput
@@ -58,7 +54,6 @@ function App() {
         if (res.status === 200) {
           setSearchResults(res.data);
           setListingsFound(true);
-          console.log(searchResults);
         } else {
           setListingsFound(false);
         }
@@ -80,7 +75,6 @@ function App() {
     const completeAddress = `${
       unitNum === "" ? "" : unitNum + "/"
     }${streetNum} ${street}, ${suburbName}, ${stateSelect} ${postcode}`;
-    console.log(completeAddress);
     axios
       .post(URL_TO_BE_CALLED + "/addListing", {
         streetNum: streetNum,
@@ -94,8 +88,12 @@ function App() {
         completeAddress: completeAddress
       })
       .then(res => {
-        console.log(res);
-        console.log(res.data);
+        setListingAdded(true);
+        setErrorInAdding(false);
+      })
+      .catch(err => {
+        setListingAdded(false);
+        setErrorInAdding(true);
       });
   };
 
@@ -139,11 +137,16 @@ function App() {
         Please enter the details of your property listing!
       </h2>
       <form className="prop-listing-form" onSubmit={handleSubmit}>
-        <span className="prop-listing-form-helper">
+        <div
+          className="prop-listing-form-helper"
+          style={{ textAlign: "center", marginBottom: "25px" }}
+        >
           Fields marked (*) are required
-        </span>
+        </div>
         <div className="prop-listing-form-ques">
-          <label htmlFor="streetNum">Enter the street number</label>
+          <label htmlFor="streetNum">
+            Enter the street number<sup> *</sup>
+          </label>
           <input
             type="text"
             value={formValues.streetNum}
@@ -164,7 +167,9 @@ function App() {
           />
         </div>
         <div className="prop-listing-form-ques">
-          <label htmlFor="street">Enter the street</label>
+          <label htmlFor="street">
+            Enter the Street<sup> *</sup>
+          </label>
           <input
             type="text"
             value={formValues.street}
@@ -175,7 +180,7 @@ function App() {
           />
         </div>
         <div className="prop-listing-form-ques">
-          <label htmlFor="streetType">Enter the street type</label>
+          <label htmlFor="streetType">Enter the Street type</label>
           <input
             type="text"
             value={formValues.streetType}
@@ -185,7 +190,9 @@ function App() {
           />
         </div>
         <div className="prop-listing-form-ques">
-          <label htmlFor="suburbName">Enter the Suburb Name</label>
+          <label htmlFor="suburbName">
+            Enter the Suburb Name<sup> *</sup>
+          </label>
           <input
             type="text"
             value={formValues.suburbName}
@@ -196,7 +203,9 @@ function App() {
           />
         </div>
         <div className="prop-listing-form-ques">
-          <label htmlFor="postcode">Enter the Postcode</label>
+          <label htmlFor="postcode">
+            Enter the Postcode<sup> *</sup>
+          </label>
           <input
             type="text"
             value={formValues.postcode}
@@ -207,7 +216,9 @@ function App() {
           />
         </div>
         <div className="prop-listing-form-ques">
-          <label htmlFor="stateSelect">Choose the State</label>
+          <label htmlFor="stateSelect">
+            Choose the State<sup> *</sup>
+          </label>
           <select
             type="text"
             value={formValues.stateSelect}
@@ -232,7 +243,6 @@ function App() {
             value={formValues.propertyType}
             id="propertyType"
             name="propertyType"
-            required
             onChange={handleChange}
           >
             <option>House</option>
@@ -245,6 +255,16 @@ function App() {
           value="Submit my Listing!"
           className="submit-buttons"
         />
+        {listingAdded ? (
+          <div style={{ textAlign: "center" }}>
+            Your listing was successfully added
+          </div>
+        ) : null}
+        {errorInAdding ? (
+          <div style={{ color: "red", textAlign: "center" }}>
+            There was an error in adding your listing. Please try again!
+          </div>
+        ) : null}
       </form>
       {data.length > 0 ? <h2>Here are all the Listings on the site</h2> : null}
       <div className="all-listings">
