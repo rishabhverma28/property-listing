@@ -1,0 +1,93 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.App-header {
+  background-color: #282c34;
+  /* min-height: 100vh; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #09d3ac;
+}
+
+h1 {
+  margin: 10px auto;
+}
+
+h2 {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.prop-listing-form,
+.App-searchbar {
+  width: 40%;
+  margin: 0 auto;
+}
+
+.prop-listing-form-ques,
+.property-listing-search {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  margin: 10px 0;
+}
+
+.prop-listing-form-ques label {
+  padding: 10px 10px 10px 0;
+  /* padding-left: 0; */
+}
+
+.prop-listing-form-ques input {
+  padding: 10px;
+}
+.property-listing-search input {
+  padding: 10px;
+}
+
+.submit-buttons {
+  display: inline-block;
+  border: none;
+  padding: 1rem 2rem;
+  margin: 0;
+  text-decoration: none;
+  background: #0069ed;
+  color: #ffffff;
+  font-family: sans-serif;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  text-align: center;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.searched-listings {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 10px;
+  row-gap: 10px;
+}
+.all-listings {
+  width: 60%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 10px;
+}
