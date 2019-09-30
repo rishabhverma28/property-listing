@@ -79,18 +79,18 @@ h2 {
   -moz-appearance: none;
 }
 
-.searched-listings {
+/* .searched-listings {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   column-gap: 10px;
   row-gap: 10px;
-}
+} */
 .all-listings {
   width: 95%;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  column-gap: 10px;
+  /* display: grid;
+  grid-template-columns: 1fr 1fr 1fr; */
+  /* column-gap: 10px; */
 }
 
 @media screen and (min-width: 769px) {
